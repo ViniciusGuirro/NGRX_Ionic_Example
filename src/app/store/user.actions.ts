@@ -39,3 +39,17 @@ export const removeUserListItemError = createAction(
     '[User List Effects] Remove User List Item Error',
     props<{ item: UserListItem }>()
 );
+
+export const updateUserListItem = createAction(
+    '[User List] Update User List Item',
+    props<{ item: UserListItem }>()
+);
+
+export const updateUserListItemSuccess = createAction(
+    '[User List Effects] Update User List Item Success',
+);
+
+export const updateUserListItemError = createAction(
+    '[User List Effects] Update User List Item Error',
+    props<{ item: UserListItem }>()
+);

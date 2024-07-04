@@ -1,7 +1,7 @@
 import { inject } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, delay, map, mergeMap, of, switchMap } from "rxjs";
-import { addUserListItem, addUserListItemError, addUserListItemSuccess, loadUserList, loadUserListError, loadUserListSuccess, removeUserListItem, removeUserListItemError, removeUserListItemSuccess } from "./user.actions";
+import { addUserListItem, addUserListItemError, addUserListItemSuccess, loadUserList, loadUserListError, loadUserListSuccess, removeUserListItem, removeUserListItemError, removeUserListItemSuccess, updateUserListItem, updateUserListItemError, updateUserListItemSuccess } from "./user.actions";
 import { UserListService } from "../user-list.service";
 
 export const loadUserListEffect = createEffect((
@@ -42,4 +42,17 @@ export const removeUserListItemEffect = createEffect((
             catchError(() => of(removeUserListItemError({ item })))
         )
     )
-), { functional: true })
+), { functional: true });
+
+export const updateUserListItemEffect = createEffect((
+    actions$ = inject(Actions),
+    service = inject(UserListService)
+) => actions$.pipe(
+    ofType(updateUserListItem),
+    mergeMap(({ item }) =>
+        service.updateUser(item).pipe(
+            map(() => updateUserListItemSuccess()),
+            catchError(() => of(updateUserListItemError({ item })))
+        )
+    )
+), { functional: true });

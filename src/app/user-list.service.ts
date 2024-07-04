@@ -25,4 +25,14 @@ export class UserListService {
     this.user = this.user.filter(i => i.id !== item.id);
     return of(this.user);
   }
+
+  updateUser(item: UserListItem) {
+    const indexUserUpdate = this.user.findIndex(i => i.id === item.id);
+
+    this.user.splice(indexUserUpdate, 1);
+
+    this.user[indexUserUpdate] = item;
+
+    return of(this.user);
+  }
 }

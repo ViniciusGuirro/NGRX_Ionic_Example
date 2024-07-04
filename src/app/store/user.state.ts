@@ -2,7 +2,7 @@ export interface UserListCreateBase {
     name: string;
     age: number;
     genre: string;
-    profission: string
+    profession: string
 }
 
 export interface UserListItem extends UserListCreateBase {
@@ -14,4 +14,5 @@ export interface UserListState {
     isLoading: boolean;
     isSaving: boolean;
     isDeleting: boolean;
+    isUpdating: boolean;
 }

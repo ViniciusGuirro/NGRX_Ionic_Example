@@ -1,12 +1,13 @@
 import { createReducer, on } from "@ngrx/store";
 import { UserListState } from "./user.state";
-import { addUserListItem, addUserListItemError, addUserListItemSuccess, loadUserList, loadUserListError, loadUserListSuccess, removeUserListItem, removeUserListItemError, removeUserListItemSuccess } from "./user.actions";
+import { addUserListItem, addUserListItemError, addUserListItemSuccess, loadUserList, loadUserListError, loadUserListSuccess, removeUserListItem, removeUserListItemError, removeUserListItemSuccess, updateUserListItem, updateUserListItemError, updateUserListItemSuccess } from "./user.actions";
 
 export const initialState: UserListState = {
     entities: [],
     isLoading: false,
     isSaving: false,
-    isDeleting: false
+    isDeleting: false,
+    isUpdating: false,
 };
 
 export const userListReducer = createReducer(
@@ -39,7 +40,7 @@ export const userListReducer = createReducer(
     })),
     on(removeUserListItem, (state, { item }) => ({
         ...state,
-        entities: state.entities.filter(i => i.id !== item.id),
+        entities: state.entities.filter(user => user.id !== item.id),
         isDeleting: true
     })),
     on(removeUserListItemSuccess, (state) => ({
@@ -50,5 +51,30 @@ export const userListReducer = createReducer(
         ...state,
         entities: [...state.entities, item],
         isDeleting: false
-    }))
+    })),
+    on(updateUserListItem, (state, { item }) => {
+        const index = state.entities.findIndex(existingItem => existingItem.id === item.id);
+
+        if (index === -1) {
+            return state;
+        }
+
+        const updatedEntities = [...state.entities];
+        updatedEntities[index] = { ...updatedEntities[index], ...item };
+
+        return {
+            ...state,
+            entities: updatedEntities,
+            isUpdating: true
+        };
+    }),
+    on(updateUserListItemSuccess, (state) => ({
+        ...state,
+        isUpdating: false
+    })),
+    on(updateUserListItemError, (state, { item }) => ({
+        ...state,
+        entities: [...state.entities, item],
+        isUpdating: false
+    })),
 )

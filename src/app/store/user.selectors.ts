@@ -22,3 +22,8 @@ export const getUserListIsDeleting = createSelector(
     getUserListState,
     (state: UserListState) => state?.isDeleting
 );
+
+export const getUserListIsUpdating = createSelector(
+    getUserListState,
+    (state: UserListState) => state?.isUpdating
+);
