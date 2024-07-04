@@ -1,0 +1,35 @@
+<ion-content>
+  <ion-row>
+    <ion-col size="12">
+      <app-add-user></app-add-user>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf="(users$ | async)?.length === 0 && !(isSaving$ | async) && !(isDeleting$ | async)">
+    <ion-col class="ion-text-center" size="12">
+      <ion-label class="labelNoUsers">Não há usuários cadastrados na base ainda, cadastre agora :)</ion-label>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngFor="let user of (users$ | async)">
+    <ion-col size="10">
+        <ion-label>Name: {{user.name}}</ion-label>
+        <br />
+        <ion-label>Age: {{user.age}}</ion-label>
+        <br />
+        <ion-label>Genre: {{user.genre}}</ion-label>
+        <br />
+        <ion-label>Profession: {{user.profission}}</ion-label>
+        <br />
+    </ion-col>
+    
+    <ion-col class="colIcon" size="2">
+      <ion-icon (click)="removeuser(user)" color="danger" name="remove-circle-outline"></ion-icon>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-spinner *ngIf="isSaving$ | async" name="bubbles"></ion-spinner>
+
+  <ion-spinner *ngIf="isDeleting$ | async" name="bubbles"></ion-spinner>
+</ion-content>
