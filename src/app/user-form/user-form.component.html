@@ -1,0 +1,23 @@
+<form [formGroup]="form" class="align-items-center">
+  <ion-list class="ion-padding-horizontal">
+      <ion-item>
+          <ion-input placeholder="Name" label="Name" labelPlacement="floating" type="text"
+              formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-input placeholder="Profession" label="Profession" labelPlacement="floating"
+              formControlName="profession" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-input placeholder="Age" label="Age" labelPlacement="floating" formControlName="age"
+              type="number"></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-input placeholder="Genre" label="Genre" labelPlacement="floating" formControlName="genre"
+              type="text"></ion-input>
+      </ion-item>
+  </ion-list>
+</form>

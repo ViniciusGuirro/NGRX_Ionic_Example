@@ -16,9 +16,10 @@ import * as userListEffects from "./store/user.effects"
 import { EffectsModule } from '@ngrx/effects';
 
 import { UserListService } from './user-list.service';
+import { UserFormComponent } from './user-form/user-form.component';
 
 @NgModule({
-  declarations: [AppComponent, AddUserComponent],
+  declarations: [AppComponent, AddUserComponent, UserFormComponent],
   imports: [
     BrowserModule, 
     IonicModule.forRoot(), 

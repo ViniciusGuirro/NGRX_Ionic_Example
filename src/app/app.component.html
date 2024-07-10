@@ -11,7 +11,7 @@
     </ion-col>
   </ion-row>
 
-  <ion-row *ngFor="let user of (users$ | async)">
+  <ion-row *ngFor="let user of (users$ | async); let i = index">
     <ion-col *ngIf="!isUpdatingUser" size="10">
       <ion-label>Name: {{user.name}}</ion-label>
       <br />
@@ -23,44 +23,22 @@
       <br />
     </ion-col>
 
-    <ion-col *ngIf="isUpdatingUser" size="10">
-      <form [formGroup]="form" class="align-items-center">
-        <ion-list class="ion-padding-horizontal">
-          <ion-item>
-            <ion-input placeholder="Name" label="Name" labelPlacement="floating" type="text"
-              formControlName="name"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-input placeholder="Profession" label="Profession" labelPlacement="floating"
-              formControlName="profession" type="text"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-input placeholder="Age" label="Age" labelPlacement="floating" formControlName="age"
-              type="number"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-input placeholder="Genre" label="Genre" labelPlacement="floating" formControlName="genre"
-              type="text"></ion-input>
-          </ion-item>
-        </ion-list>
-      </form>
+    <ion-col *ngIf="isUpdatingUser && i === index" size="10">
+      <app-user-form (formValuesChange)="onFormValuesChange($event)" (formStatusChange)="onFormStatusChange($event)"></app-user-form>
     </ion-col>
 
     <ion-col *ngIf="!isUpdatingUser" class="colIcon" size="2">
       <ion-icon (click)="removeuser(user)" color="danger" name="remove-circle-outline"></ion-icon>
       <br />
       <br />
-      <ion-icon (click)="openUpdateForm(user)" color="success" name="create-outline"></ion-icon>
+      <ion-icon (click)="openUpdateForm(user, i)" color="success" name="create-outline"></ion-icon>
     </ion-col>
 
-    <ion-col *ngIf="isUpdatingUser" class="colIcon" size="2">
+    <ion-col *ngIf="isUpdatingUser && i === index" class="colIcon" size="2">
       <ion-icon (click)="updateuser(user)" color="success" name="checkmark-circle-outline"></ion-icon>
       <br />
       <br />
-      <ion-icon (click)="isUpdatingUser = false" color="danger" name="close-circle-outline"></ion-icon>
+      <ion-icon (click)="isUpdatingUser = false; index = 0;" color="danger" name="close-circle-outline"></ion-icon>
     </ion-col>
 
   </ion-row>

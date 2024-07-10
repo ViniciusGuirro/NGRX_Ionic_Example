@@ -2,7 +2,7 @@ export interface UserListCreateBase {
     name: string;
     age: number;
     genre: string;
-    profession: string
+    profession: string;
 }
 
 export interface UserListItem extends UserListCreateBase {

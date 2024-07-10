@@ -1,32 +1,10 @@
-<form [formGroup]="form" class="align-items-center">
-    <ion-title class="ion-padding ion-text-center">Add user in our base :)</ion-title>
+<ion-title class="ion-padding ion-text-center">Add user in our base :)</ion-title>
 
-    <ion-list class="ion-padding-horizontal">
-        <ion-item>
-            <ion-input placeholder="Name" label="Name" labelPlacement="floating" type="text"
-                formControlName="name"></ion-input>
-        </ion-item>
+<app-user-form (formValuesChange)="onFormValuesChange($event)" (formStatusChange)="onFormStatusChange($event)"></app-user-form>
 
-        <ion-item>
-            <ion-input placeholder="Profession" label="Profession" labelPlacement="floating"
-                formControlName="profession" type="text"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-input placeholder="Age" label="Age" labelPlacement="floating" formControlName="age"
-                type="number"></ion-input>
-        </ion-item>
-
-        <ion-item>
-            <ion-input placeholder="Genre" label="Genre" labelPlacement="floating" formControlName="genre"
-                type="text"></ion-input>
-        </ion-item>
-    </ion-list>
-
-    <ion-row>
-        <ion-col size="12">
-            <ion-button expand="block" color="light" type="submit" (click)="addUser()" [disabled]="form.invalid">Add
-                User</ion-button>
-        </ion-col>
-    </ion-row>
-</form>
+<ion-row>
+    <ion-col size="12">
+        <ion-button expand="block" color="light" type="submit" (click)="addUser()" [disabled]="!formValid">Add
+            User</ion-button>
+    </ion-col>
+</ion-row>
